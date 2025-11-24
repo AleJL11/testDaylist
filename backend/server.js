@@ -60,7 +60,7 @@ app.get('/api/daylists', (req, res) => {
     res.json(daylists);
 });
 
-/*
+/* Endpoint de eliminación en memoria al reinicar comentado
 // Endpoint para limpiar
 app.delete('/api/daylists', (req, res) => {
   daylists = [];
@@ -85,4 +85,5 @@ app.delete('/api/daylists/:id', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Daylist backend corriendo en http://localhost:${PORT}`);
+
 });
