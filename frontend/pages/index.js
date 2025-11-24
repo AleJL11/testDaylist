@@ -89,6 +89,28 @@ export default function Home() {
         }
     }
 
+    // Manejo de eliminación de registros
+    async function handleDelete(id) {
+        try {
+            const res = await fetch(`${BACKEND_BASE}/api/daylists/${id}`, {
+            method: 'DELETE'
+            });
+
+            if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Error al eliminar');
+            }
+
+            // Actualiza la lista en frontend
+            setEntries(prev => prev.filter(entry => entry.id !== id));
+
+        } catch (err) {
+            console.error("Error al eliminar registro:", err);
+            setError(err.message || "Error desconocido");
+        }
+    }
+
+
     return (
         <main style={styles.container}>
             <h1 style={styles.title}>Daylist - Bitácora diaria</h1>
@@ -143,6 +165,12 @@ export default function Home() {
                                         <div style={{marginTop:6, fontSize: 13, color:'#333'}}>Tiempo: {e.hours} h</div>
                                     </div>
                                     <div style={{textAlign:'right', fontSize:12, color:'#666'}}>Creado: {new Date(e.createdAt).toLocaleString()}</div>
+                                    <button 
+                                        style={{marginTop:4, padding:'4px 8px', fontSize:12, borderRadius:4, background:'#e12d39', color:'white', border:'none', cursor:'pointer'}}
+                                        onClick={() => handleDelete(e.id)}
+                                    >
+                                        Eliminar
+                                    </button>
                                 </div>
                             </li>
                         ))}
