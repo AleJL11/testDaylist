@@ -60,6 +60,29 @@ app.get('/api/daylists', (req, res) => {
     res.json(daylists);
 });
 
+/*
+// Endpoint para limpiar
+app.delete('/api/daylists', (req, res) => {
+  daylists = [];
+  res.status(204).send();
+});
+*/
+
+// DELETE /api/daylists/:id - eliminar registro
+app.delete('/api/daylists/:id', (req, res) => {
+  const { id } = req.params;
+  const index = daylists.findIndex(entry => entry.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Registro no encontrado' });
+  }
+
+  // Elimina del array
+  daylists.splice(index, 1);
+
+  res.status(200).json({ message: 'Registro eliminado correctamente' });
+});
+
 app.listen(PORT, () => {
     console.log(`Daylist backend corriendo en http://localhost:${PORT}`);
 });
