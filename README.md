@@ -15,13 +15,6 @@ Permite ingresar el nombre del desarrollador, la fecha, la actividad realizada y
 
 - **Comunicación**: API REST (fetch desde el frontend)
 
-daylist/
- backend/           # Servidor Express
-    server.js       # Endpoints GET y POST /api/daylists
- frontend/          # Cliente Next.js
-    pages/
-        index.js  # Interfaz del usuario y lógica de fetch
-
 ## Flujo de funcionamiento
 
 1. El usuario completa el formulario con:
@@ -79,6 +72,8 @@ Recibe un objeto JSON con:
 
 ## Notas finales
 
-- La aplicación guarda los datos en memoria; si se reinicia el backend, los registros se pierden.
+- La aplicación guarda los datos en memoria.
+- Si se reinicia el backend, los registros se pierden. (Esta funcionalidad esta comentada en el código)
+- Se pueden eliminar los registros al presionar el boton de eliminar.
 - La arquitectura separa claramente frontend y backend, usando fetch para la comunicación.
 - Se aplicaron buenas prácticas como validación de formulario, manejo de errores y actualización automática de la interfaz.
